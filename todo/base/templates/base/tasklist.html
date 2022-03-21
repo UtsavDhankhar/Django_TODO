@@ -1,0 +1,15 @@
+<h1> Hello</h1>
+
+
+{% for task in model %}
+
+    {{ task.user }}
+    <br> 
+    {{ task.title }}
+
+    <br>
+    <a href = "{% url 'detail' task.id %}"> View </a>
+    <a href = "{% url 'update_task' task.id %}"> update </a>
+    <a href = "{% url 'delete_task' task.id %}"> delete </a>
+
+{% endfor %}

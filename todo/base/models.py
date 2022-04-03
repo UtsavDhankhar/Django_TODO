@@ -11,8 +11,11 @@ class Task(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE , null = True , blank = True)
     title = models.CharField(max_length=100)
     description = models.TextField(null=True , blank=True)
+    complete_date = models.DateField()
+    create = models.DateField(auto_now_add=True)
     complete = models.BooleanField(default=False)
-    create = models.DateTimeField(auto_now_add=True)
+    
+    
 
 
     def __str__(self):

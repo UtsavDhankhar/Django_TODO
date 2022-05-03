@@ -27,11 +27,13 @@ def login_page(request):
 
         user = authenticate(request , username=username , password = password)
     
-        if(user is not NONE):
+        if(user):
+
             login(request , user)
             return redirect ('task_list')
         
         else:
+
             return render(request, 'base/login_register.html' , {'error':"Invalid input" , 'context': page})
 
     else:
@@ -76,7 +78,7 @@ def logout_page(request):
 
 @login_required(login_url='login')
 def taskList(request):
-
+    
     model = Task.objects.filter(user=request.user)
     total_task = model.count()
     complete = model.filter(complete=True).count()
@@ -84,9 +86,16 @@ def taskList(request):
     
 
     search = request.GET.get('search') or ""
+    date = request.GET.get('select') or ""
+    today = datetime.datetime.now()
 
     if search:
         model = model.filter(title__icontains = search)
+
+    if(date == "1"):
+        if(model.filter(create=today)):
+            print(today.date)
+        
 
     return render(request , 'base/tasklist.html' , {'model': model ,
                                                     'total_task' : total_task , 

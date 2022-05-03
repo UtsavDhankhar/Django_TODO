@@ -12,7 +12,7 @@ class Task(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(null=True , blank=True)
     complete_date = models.DateField()
-    create = models.DateField(auto_now_add=True)
+    create = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     
     
